@@ -1,0 +1,107 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Mon Feb  5 22:24:00 2024
+@author: kudva.7
+
+This is the main script which compares the search process of the baselines search process. We have 4 options 
+for the algorithms namely:
+    1) BONSAI: See main paper
+    2) ARBO: See https://aiche.onlinelibrary.wiley.com/doi/abs/10.1002/aic.17591
+    3) BOFN (nominal): https://arxiv.org/pdf/2112.15311
+    4) Random: Seach is randomly generated, recommendation is based on BONSAI
+    5) VBO (nominal): Vanilla Bayesian optimization, we use logEI
+    
+Note that the code contains the conventions:
+    z is the design variables
+    w is the uncertain variables
+    x: = [z;w] contraty to z :=[x;w] in the paper
+"""
+# Imports 
+import torch
+from ObjectiveFN import function_network_examples
+from robust_algorithms import BONSAI, ARBO, BOFN_nominal_mode
+from torch.quasirandom import SobolEngine
+import matplotlib.pyplot as plt
+import pickle
+from utils import generate_initial_data
+import copy
+
+
+example_list = ['polynomial', 'robot', 'classifier', 'cliff', 'HeatX', 'sine','rosenbrock','pharm', 'spring']
+algorithm_list = ['BONSAI'] # All the options: ['BONSAI', 'ARBO', 'BOFN', 'Random', 'VBO']
+
+# TODO: Automate to evaluate all the test functions 
+example = example_list[0] # Change the number based on contents of example_list
+
+function_network, g, nominal_w = function_network_examples(example, algorithm_name = algorithm_list[0])
+nz = g.nz
+nw = g.nw
+input_dim = g.nx  
+n_outs = g.n_nodes
+
+# Start the modeling procedure
+Ninit = 2*(input_dim + 1) # Initial samples
+T = 100 # Additional evaluations
+
+data = {}
+Nrepeats = 30
+
+for n in range(Nrepeats):
+    j = n + 1     
+    print('Current repeat', j)   
+    if 'Random' in algorithm_list:
+        x_init, y_init = generate_initial_data( g = g, function_network = function_network, Ninit = Ninit + T, seed = (j+1)*2000, get_y_vals= True)
+        
+        val = {'X': x_init, 'Y': y_init,'Ninit': Ninit, 'T': T}
+        data[n] = val
+        
+    elif 'BOFN' in algorithm_list or 'VBO' in algorithm_list:
+        x_init, y_init = generate_initial_data( g = g, function_network = function_network, Ninit = Ninit, seed = (j+1)*2000, get_y_vals= False)
+    
+    else:
+        x_init, y_init = generate_initial_data( g = g, function_network = function_network, Ninit = Ninit, seed = (j+1)*2000, get_y_vals= True)
+        
+    if 'ARBO' in algorithm_list:
+        print('Running ARBO')
+        val = ARBO(x_init, y_init, g, objective = function_network, T = T, beta = torch.tensor(3))
+        data[n] = val
+        
+    if 'ARBONS' in algorithm_list:
+        print('Running ARBONS')
+        val = ARBONS(x_init, y_init, g, objective = function_network, T = T, beta = torch.tensor(2))
+        data[n] = val
+        
+    if 'BOFN' in algorithm_list or 'VBO' in algorithm_list:
+        print('Running BOFN - nominal mode')
+        if example == 'robot':
+            if 'BOFN' in algorithm_list:
+                val = BOFN_nominal_mode(x_init, y_init, g, objective = function_network , T = T, nominal_w = nominal_w) # Also keep get_g_vals true in this case
+                data[n] = val
+            if 'VBO' in algorithm_list:
+                val = BOFN_nominal_mode(x_init, y_init, g, objective = function_network , T = T, nominal_w = nominal_w, graph_structure= False) # Also keep get_g_vals true in this case
+                data[n] = val 
+            
+        else:   
+            # Note: Keep get_g_vals to False since we are setting a nominal value specific to the problem
+            x_init2 = copy.deepcopy(x_init)
+            x_init2[..., g.uncertain_input_indices] = nominal_w        
+            x_init2, y_init2 = generate_initial_data( g = g, function_network = function_network, Ninit = Ninit, x_init = x_init2)
+            if 'BOFN' in algorithm_list:
+                val = BOFN_nominal_mode(x_init2, y_init2, g, objective = function_network , T = T, nominal_w = nominal_w)
+                data[n] = val
+            if 'VBO' in algorithm_list:
+                val = BOFN_nominal_mode(x_init2, y_init2, g, objective = function_network , T = T, nominal_w = nominal_w, graph_structure= False)
+                data[n] = val           
+        
+    if 'BONSAI' in algorithm_list:
+        print('Running BONSAI')               
+        val = BONSAI( x_init, y_init, g, objective = function_network, T = T)    
+        data[n] = val
+        
+    
+
+# Files are saved as pickle files do this if saving
+
+# with open(algorithm_list[0]+'_'+example+'.pickle', 'wb') as handle:
+#     pickle.dump(data, handle, protocol=pickle.HIGHEST_PROTOCOL)
