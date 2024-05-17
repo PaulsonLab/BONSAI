@@ -1,11 +1,11 @@
 # BONSAI - Bayesian Optimization of Network Systems under Uncertainty
 Uncertainties are pervasive in most real world systems and we often need to optimize the design variables of these systems in the presence of adversarial variables. Robust optimization is one such methodolgy which considers optimization in the presence of uncertainty. With this background, BONSAI looks at problems with two salient features. First feature is that oftentimes, we come accross optimization of systems with multi-disciliniary teams working on design of systems with various nodes sharing design and uncertainty variables. Below we illustrate one such example containing aircraft design problem [1]:
 
-<img src = "https://github.com/PaulsonLab/BONSAI/blob/main/bonsai_figures/example_problem.png", width = "500">
+<img src="bonsai_figures/example_problem.png" width = 500>
 
 For the second feature, lets consider the popular polynomial function [3] which includes implementation errors such that $||\delta x||_{2} \leq 0.5$. In the left figure we see the nominal perspective in which the implementation error is not considered, and on the right we see that the robust solution recommends a different design. Notice that implementation of nominal solution would have led to extremely poor worst-case performance; whereas with robust solution, even though we are getting slightly sub-optimal average performance, the worst-case performance is much higher than that of the nominal solution.
 
-<img src="bonsai_figures/polynomial_countour.png", width = "500">
+<img src="bonsai_figures/polynomial_countour.png" width = 500>
 
 How does one solve the robsut optimization of system especially when each node can be a combination of black-box and white-box function? BONSAI answers this question by extending the BOFN framework [2], to include strategies to recommend designs to be robust against potentially adversarial perturbations.
 
