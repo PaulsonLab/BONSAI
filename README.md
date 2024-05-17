@@ -3,7 +3,7 @@ Uncertainties are pervasive in most real world systems and we often need to opti
 
 <img src="bonsai_figures/example_problem.png" width = 500>
 
-For the second feature, lets consider the popular polynomial function [3] which includes implementation errors such that $||\delta x||_{2} \leq 0.5$. In the left figure we see the nominal perspective in which the implementation error is not considered, and on the right we see that the robust solution recommends a different design. Notice that implementation of nominal solution would have led to extremely poor worst-case performance; whereas with robust solution, even though we are getting slightly sub-optimal average performance, the worst-case performance is much higher than that of the nominal solution.
+For the second feature, lets consider the popular polynomial function [3] which includes implementation errors such that $||\Delta x||_{2} \leq 0.5$. In the left figure we see the nominal perspective in which the implementation error is not considered, and on the right we see that the robust solution recommends a different design. Notice that implementation of nominal solution would have led to extremely poor worst-case performance; whereas with robust solution, even though we are getting slightly sub-optimal average performance, the worst-case performance is much higher than that of the nominal solution.
 
 <img src="bonsai_figures/polynomial_countour.png" width = 500>
 
@@ -22,5 +22,7 @@ Rest of the .py files have description and comments for further dissection. Plea
 
 ## References
 [1] Wei Li, Mi Xiao, and Liang Gao. Improved collaboration pursuing method for multidisciplinary robust design optimization. Structural and Multidisciplinary Optimization, 59(6):1949–1968, December 2018.
+
 [2] Raul Astudillo and Peter I. Frazier. Bayesian optimization of composite functions. 2019.
+
 [3] Dimitris Bertsimas, Omid Nohadani, and Kwong Meng Teo. Robust optimization for unconstrained simulation-based problems. Operations Research, 58(1):161–178, February 2010
