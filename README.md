@@ -1,4 +1,4 @@
-# BONSAI - Bayesian Optimization of Network Systems under Uncertainty
+# BONSAI - Bayesian Optimization of Network Systems under uncertAInty
 Uncertainties are pervasive in most real world systems and we often need to optimize the design variables of these systems in the presence of adversarial variables. Robust optimization is one such methodolgy which considers optimization in the presence of uncertainty. With this background, BONSAI looks at problems with two salient features. First feature is that oftentimes, we come accross optimization of systems with multi-disciliniary teams working on design of systems with various nodes sharing design and uncertainty variables. Below we illustrate one such example containing aircraft design problem [1]:
 
 <img src="bonsai_figures/example_problem.png" width = 500>
