@@ -20,6 +20,15 @@ We have included all nine case studies + the illustrative example that is descri
 
 Rest of the .py files have description and comments for further dissection. Please feel free to reach out for additional usage questions!
 
+## References
+[1] Wei Li, Mi Xiao, and Liang Gao. Improved collaboration pursuing method for multidisciplinary robust design optimization. Structural and Multidisciplinary Optimization, 59(6):1949–1968, December 2018.
+
+[2] Raul Astudillo and Peter I. Frazier. Bayesian optimization of composite functions. 2019.
+
+[3] Dimitris Bertsimas, Omid Nohadani, and Kwong Meng Teo. Robust optimization for unconstrained simulation-based problems. Operations Research, 58(1):161–178, February 2010
+
+
+
 ## Citation
 If you use BONSAI in your work, please cite our paper. For implementation related details, please refer to the documentation or contact us!
 
@@ -36,12 +45,7 @@ If you use BONSAI in your work, please cite our paper. For implementation relate
   year = {2026},
   month = jan,
   pages = {109393}
-}''
+}'''
 
 
-## References
-[1] Wei Li, Mi Xiao, and Liang Gao. Improved collaboration pursuing method for multidisciplinary robust design optimization. Structural and Multidisciplinary Optimization, 59(6):1949–1968, December 2018.
 
-[2] Raul Astudillo and Peter I. Frazier. Bayesian optimization of composite functions. 2019.
-
-[3] Dimitris Bertsimas, Omid Nohadani, and Kwong Meng Teo. Robust optimization for unconstrained simulation-based problems. Operations Research, 58(1):161–178, February 2010
