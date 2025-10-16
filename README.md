@@ -45,7 +45,7 @@ If you use BONSAI in your work, please cite our paper. For implementation relate
   year = {2026},
   month = jan,
   pages = {109393}
-}'''
+}
 
 
 
