@@ -20,6 +20,25 @@ We have included all nine case studies + the illustrative example that is descri
 
 Rest of the .py files have description and comments for further dissection. Please feel free to reach out for additional usage questions!
 
+## Citation
+If you use BONSAI in your work, please cite our paper. For implementation related details, please refer to the documentation or contact us!
+
+```bibtex
+@article{Kudva2026,
+  title = {BONSAI: Structure-exploiting robust Bayesian optimization for networked black-box systems under uncertainty},
+  volume = {204},
+  ISSN = {0098-1354},
+  url = {http://dx.doi.org/10.1016/j.compchemeng.2025.109393},
+  DOI = {10.1016/j.compchemeng.2025.109393},
+  journal = {Computers &amp; Chemical Engineering},
+  publisher = {Elsevier BV},
+  author = {Kudva,  Akshay and Paulson,  Joel A.},
+  year = {2026},
+  month = jan,
+  pages = {109393}
+}
+
+
 ## References
 [1] Wei Li, Mi Xiao, and Liang Gao. Improved collaboration pursuing method for multidisciplinary robust design optimization. Structural and Multidisciplinary Optimization, 59(6):1949–1968, December 2018.
 
