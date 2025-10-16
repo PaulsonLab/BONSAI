@@ -39,7 +39,7 @@ If you use BONSAI in your work, please cite our paper. For implementation relate
   ISSN = {0098-1354},
   url = {http://dx.doi.org/10.1016/j.compchemeng.2025.109393},
   DOI = {10.1016/j.compchemeng.2025.109393},
-  journal = {Computers &amp; Chemical Engineering},
+  journal = {Computers \& Chemical Engineering},
   publisher = {Elsevier BV},
   author = {Kudva,  Akshay and Paulson,  Joel A.},
   year = {2026},
